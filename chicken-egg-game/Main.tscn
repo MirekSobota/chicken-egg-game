@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://oefv57sqbphl"]
+
+[ext_resource type="Script" uid="uid://by4acglxv387q" path="res://scripts/main.gd" id="1_fos0i"]
+[ext_resource type="Texture2D" uid="uid://2kjmv34y83h6" path="res://Assets/Background/background.png" id="1_glv2v"]
+[ext_resource type="PackedScene" uid="uid://cgrg4eaopgsec" path="res://scenes/egg.tscn" id="2_cm0pq"]
+[ext_resource type="Script" uid="uid://dhbrxfy7m4nr4" path="res://scripts/player.gd" id="2_r0du0"]
+[ext_resource type="Texture2D" uid="uid://cchgs563r0sw1" path="res://Assets/Player/Player.png" id="3_cm0pq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxg2q"]
+radius = 132.0
+height = 382.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_fos0i")
+metadata/_edit_vertical_guides_ = [-1903.0]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(665.00006, 284)
+scale = Vector2(3.7026367, 1.5825197)
+texture = ExtResource("1_glv2v")
+
+[node name="Chickens" type="Node2D" parent="."]
+
+[node name="Eggs" type="Node2D" parent="."]
+position = Vector2(605, 432)
+
+[node name="Egg" parent="Eggs" instance=ExtResource("2_cm0pq")]
+position = Vector2(-25, -251)
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(621, -179)
+script = ExtResource("2_r0du0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-321, 586)
+shape = SubResource("CapsuleShape2D_rxg2q")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(-333, 617)
+texture = ExtResource("3_cm0pq")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreLabel" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 25.899002
+anchor_top = 2.506
+anchor_right = 25.899002
+anchor_bottom = 2.506
+offset_left = -488.96008
+offset_top = -43.240005
+offset_right = -122.96008
+offset_bottom = 134.76
+text = "0"
+
+[connection signal="collected" from="Eggs/Egg" to="." method="_on_egg_collected"]
