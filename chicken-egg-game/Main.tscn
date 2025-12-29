@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://oefv57sqbphl"]
+[gd_scene load_steps=11 format=3 uid="uid://oefv57sqbphl"]
 
 [ext_resource type="Script" uid="uid://by4acglxv387q" path="res://scripts/main.gd" id="1_fos0i"]
 [ext_resource type="Texture2D" uid="uid://2kjmv34y83h6" path="res://Assets/Background/background.png" id="1_glv2v"]
@@ -6,38 +6,80 @@
 [ext_resource type="Script" uid="uid://dhbrxfy7m4nr4" path="res://scripts/player.gd" id="2_r0du0"]
 [ext_resource type="Texture2D" uid="uid://cchgs563r0sw1" path="res://Assets/Player/Player.png" id="3_cm0pq"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxg2q"]
-radius = 132.0
-height = 382.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fos0i"]
+radius = 57.0
+height = 118.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fos0i"]
+size = Vector2(30.5, 687)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dxm6"]
+size = Vector2(27, 702.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgr22"]
+size = Vector2(1191, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trn2v"]
+size = Vector2(1198, 18)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_fos0i")
+egg_scene = ExtResource("2_cm0pq")
 metadata/_edit_vertical_guides_ = [-1903.0]
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(665.00006, 284)
-scale = Vector2(3.7026367, 1.5825197)
+position = Vector2(578, 325)
+scale = Vector2(1.125, 0.6279296)
 texture = ExtResource("1_glv2v")
+metadata/_edit_lock_ = true
 
 [node name="Chickens" type="Node2D" parent="."]
+position = Vector2(105, 283)
+
+[node name="Spawns" type="Node2D" parent="Chickens"]
+
+[node name="Spawn1" type="Marker2D" parent="Chickens/Spawns"]
+position = Vector2(247, -64)
+
+[node name="Spawn2" type="Marker2D" parent="Chickens/Spawns"]
+position = Vector2(305, -81)
+
+[node name="Spawn3" type="Marker2D" parent="Chickens/Spawns"]
+position = Vector2(381, -101)
 
 [node name="Eggs" type="Node2D" parent="."]
-position = Vector2(605, 432)
+metadata/_edit_lock_ = true
 
 [node name="Egg" parent="Eggs" instance=ExtResource("2_cm0pq")]
-position = Vector2(-25, -251)
+position = Vector2(-116, -305)
+metadata/_edit_lock_ = true
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(621, -179)
+position = Vector2(752, -369)
 script = ExtResource("2_r0du0")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-321, 586)
-shape = SubResource("CapsuleShape2D_rxg2q")
+position = Vector2(-309, 753)
+shape = SubResource("CapsuleShape2D_fos0i")
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(-333, 617)
+position = Vector2(-301.75, 755.125)
+scale = Vector2(0.34304512, 0.3630064)
 texture = ExtResource("3_cm0pq")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+visible = false
+position = Vector2(-45, 497)
+enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 1150
+limit_bottom = 644
+position_smoothing_enabled = true
+metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -54,10 +96,64 @@ anchor_left = 25.899002
 anchor_top = 2.506
 anchor_right = 25.899002
 anchor_bottom = 2.506
-offset_left = -488.96008
-offset_top = -43.240005
-offset_right = -122.96008
-offset_bottom = 134.76
+offset_left = -270.96008
+offset_top = -19.240005
+offset_right = 95.03992
+offset_bottom = 158.76
 text = "0"
 
+[node name="Touch" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BtnLeft" type="TouchScreenButton" parent="UI/Touch"]
+position = Vector2(61, 519)
+action = "move_left"
+
+[node name="BtnRight" type="TouchScreenButton" parent="UI/Touch"]
+position = Vector2(119, 522)
+action = "move_right"
+
+[node name="BtnUp" type="TouchScreenButton" parent="UI/Touch"]
+position = Vector2(93, 490)
+action = "move_up"
+
+[node name="BtnDown" type="TouchScreenButton" parent="UI/Touch"]
+position = Vector2(86, 549)
+action = "move_down"
+
+[node name="EggTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Walls" type="StaticBody2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="LeftWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-14, 327)
+shape = SubResource("RectangleShape2D_fos0i")
+metadata/_edit_lock_ = true
+
+[node name="RightWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1167, 333)
+shape = SubResource("RectangleShape2D_3dxm6")
+metadata/_edit_lock_ = true
+
+[node name="TopWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(587, -13)
+shape = SubResource("RectangleShape2D_lgr22")
+metadata/_edit_lock_ = true
+
+[node name="BottomWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(576, 656)
+shape = SubResource("RectangleShape2D_trn2v")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 324)
+zoom = Vector2(0.8, 0.8)
+
 [connection signal="collected" from="Eggs/Egg" to="." method="_on_egg_collected"]
+[connection signal="timeout" from="EggTimer" to="." method="_on_egg_timer_timeout"]
