@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://oefv57sqbphl"]
+[gd_scene load_steps=15 format=3 uid="uid://oefv57sqbphl"]
 
 [ext_resource type="Script" uid="uid://by4acglxv387q" path="res://scripts/main.gd" id="1_fos0i"]
 [ext_resource type="Texture2D" uid="uid://2kjmv34y83h6" path="res://Assets/Background/background.png" id="1_glv2v"]
 [ext_resource type="PackedScene" uid="uid://cgrg4eaopgsec" path="res://scenes/egg.tscn" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://dhbrxfy7m4nr4" path="res://scripts/player.gd" id="2_r0du0"]
 [ext_resource type="Texture2D" uid="uid://cchgs563r0sw1" path="res://Assets/Player/Player.png" id="3_cm0pq"]
+[ext_resource type="Texture2D" uid="uid://djepdu0pwf31c" path="res://Assets/Chciken/Chicken1.png" id="4_03owx"]
+[ext_resource type="Script" uid="uid://ww4dqj2tlnao" path="res://scripts/chicken.gd" id="5_wkp8b"]
+[ext_resource type="Texture2D" uid="uid://cjb5kq31n4mit" path="res://Assets/Chciken/Chcicken2.png" id="6_20pc6"]
+[ext_resource type="Texture2D" uid="uid://ulag3gqmqxxa" path="res://Assets/Chciken/Chciken3.png" id="7_5vvyt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fos0i"]
 radius = 57.0
@@ -39,13 +43,31 @@ position = Vector2(105, 283)
 [node name="Spawns" type="Node2D" parent="Chickens"]
 
 [node name="Spawn1" type="Marker2D" parent="Chickens/Spawns"]
-position = Vector2(247, -64)
+position = Vector2(295, 12)
 
 [node name="Spawn2" type="Marker2D" parent="Chickens/Spawns"]
-position = Vector2(305, -81)
+position = Vector2(411, -5)
 
 [node name="Spawn3" type="Marker2D" parent="Chickens/Spawns"]
-position = Vector2(381, -101)
+position = Vector2(503, -19)
+
+[node name="Chicken1" type="Sprite2D" parent="Chickens"]
+position = Vector2(286, -42)
+scale = Vector2(0.5505618, 0.57804877)
+texture = ExtResource("4_03owx")
+script = ExtResource("5_wkp8b")
+
+[node name="Chicken2" type="Sprite2D" parent="Chickens"]
+position = Vector2(413.00003, -48.000023)
+scale = Vector2(0.41764706, 0.44059405)
+texture = ExtResource("6_20pc6")
+script = ExtResource("5_wkp8b")
+
+[node name="Chicken3" type="Sprite2D" parent="Chickens"]
+position = Vector2(498.00006, -67)
+scale = Vector2(0.48773006, 0.4090909)
+texture = ExtResource("7_5vvyt")
+script = ExtResource("5_wkp8b")
 
 [node name="Eggs" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
