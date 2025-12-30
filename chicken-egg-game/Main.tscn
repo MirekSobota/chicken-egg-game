@@ -29,6 +29,7 @@ size = Vector2(1198, 18)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_fos0i")
 egg_scene = ExtResource("2_cm0pq")
+eggs_container_path = NodePath("Eggs")
 metadata/_edit_vertical_guides_ = [-1903.0]
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -68,13 +69,6 @@ position = Vector2(498.00006, -67)
 scale = Vector2(0.48773006, 0.4090909)
 texture = ExtResource("7_5vvyt")
 script = ExtResource("5_wkp8b")
-
-[node name="Eggs" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
-
-[node name="Egg" parent="Eggs" instance=ExtResource("2_cm0pq")]
-position = Vector2(-116, -305)
-metadata/_edit_lock_ = true
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(752, -369)
@@ -147,7 +141,7 @@ position = Vector2(86, 549)
 action = "move_down"
 
 [node name="EggTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.2
 autostart = true
 
 [node name="Walls" type="StaticBody2D" parent="."]
@@ -177,5 +171,6 @@ metadata/_edit_lock_ = true
 position = Vector2(575, 324)
 zoom = Vector2(0.8, 0.8)
 
-[connection signal="collected" from="Eggs/Egg" to="." method="_on_egg_collected"]
+[node name="Eggs" type="Node2D" parent="."]
+
 [connection signal="timeout" from="EggTimer" to="." method="_on_egg_timer_timeout"]
