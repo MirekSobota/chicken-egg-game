@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba727m8jwuegk"]
+
+[ext_resource type="Script" uid="uid://ccjvve6lwx1p8" path="res://scripts/chicken_wander.gd" id="1_yq58b"]
+[ext_resource type="Texture2D" uid="uid://djepdu0pwf31c" path="res://Assets/Chciken/Chicken1.png" id="2_qnxra"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qnxra"]
+radius = 42.544094
+
+[node name="Chicken" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_yq58b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(5, -1.9999962)
+scale = Vector2(0.47191012, 0.43170732)
+texture = ExtResource("2_qnxra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qnxra")

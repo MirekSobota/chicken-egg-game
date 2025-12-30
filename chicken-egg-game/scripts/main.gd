@@ -15,10 +15,18 @@ extends Node2D
 
 @onready var spawns_node: Node = $Chickens/Spawns
 # Spawny
+@onready var balance: Node = $GameBalance
+# Referencja do ustawień balansu
 
+var elapsed_time: float = 0.0
+# Ile czasu trwa rozgrywka
 var score: int = 0
 var rng := RandomNumberGenerator.new()
 var spawn_points: Array[Marker2D] = []
+
+func _process(delta: float) -> void:
+	# Zliczamy czas gry
+	elapsed_time += delta
 
 func _ready() -> void:
 	
@@ -58,37 +66,42 @@ func _on_egg_collected() -> void:
 
 func _on_egg_timer_timeout() -> void:
 	# Timer odpala się co X sekund i tworzy nowe jajko
+
+	# Jeśli nie mamy kontenera jajek – nie robimy nic
 	if eggs_container == null:
 		return
 
-	# Jeśli nie mamy żadnych spawnów – nie robimy nic
+	# Jeśli nie mamy spawnów – nie robimy nic
 	if spawn_points.is_empty():
 		return
 
-	# Losujemy indeks spawna z zakresu 0..(size-1)
-	var idx: int = rng.randi_range(0, spawn_points.size() - 1)
+	# LIMIT: jeśli już jest za dużo jajek, pomijamy spawn
+	if eggs_container.get_child_count() >= balance.max_eggs_on_screen:
+		return
 
-	# Bierzemy konkretny spawn
+	# Ustawiamy timer dynamicznie (tempo rośnie z czasem)
+	$EggTimer.wait_time = balance.get_current_spawn_interval(elapsed_time)
+
+	# Losujemy spawn
+	var idx: int = rng.randi_range(0, spawn_points.size() - 1)
 	var spawn: Marker2D = spawn_points[idx]
 
-	# Spróbujemy znaleźć kurę po nazwie: Spawn1 -> Chicken1 itd.
+	# Kura (Spawn1 -> Chicken1)
 	var chicken_name: String = spawn.name.replace("Spawn", "Chicken")
-	# Szukamy węzła kury pod $Chickens
 	var chicken: Node = $Chickens.get_node_or_null(chicken_name)
-
-	# Jeśli kura istnieje i ma metodę animacji – odpalamy “pop”
 	if chicken != null and chicken.has_method("play_lay_animation"):
 		chicken.play_lay_animation()
 
-	# Tworzymy instancję jajka
+	# Tworzymy jajko
 	var egg: Area2D = egg_scene.instantiate()
-
-	# Dodajemy jajko do kontenera
 	eggs_container.add_child(egg)
 
-	# Ustawiamy pozycję jajka na pozycji markera spawna
-	# (konwersja na lokalne współrzędne kontenera jajek)
+	# Pozycja na spawnie
 	egg.position = eggs_container.to_local(spawn.global_position)
 
-	# Podpinamy sygnał zbierania jajka do funkcji w Main
+	# Podpinamy punkt
 	egg.collected.connect(_on_egg_collected)
+
+	# Ustawiamy prędkość spadania z balansu (zależnie od czasu gry)
+	# (Egg ma mieć zmienną fall_speed)
+	egg.fall_speed = balance.get_current_fall_speed(elapsed_time)
