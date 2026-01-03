@@ -1,21 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba727m8jwuegk"]
+[gd_scene load_steps=10 format=3 uid="uid://ba727m8jwuegk"]
 
 [ext_resource type="Script" uid="uid://ccjvve6lwx1p8" path="res://scripts/chicken_wander.gd" id="1_yq58b"]
-[ext_resource type="Texture2D" uid="uid://djepdu0pwf31c" path="res://Assets/Chciken/Chicken1.png" id="2_qnxra"]
+[ext_resource type="Texture2D" uid="uid://b5vuitsnvben3" path="res://Assets/Chciken/black.png" id="2_qnxra"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qnxra"]
 radius = 42.544094
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnxra"]
+atlas = ExtResource("2_qnxra")
+region = Rect2(375, 27, 125, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrhuw"]
+atlas = ExtResource("2_qnxra")
+region = Rect2(0, 184, 125, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p4ch"]
+atlas = ExtResource("2_qnxra")
+region = Rect2(375, 184, 125, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkp7k"]
+atlas = ExtResource("2_qnxra")
+region = Rect2(125, 27, 125, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bivu5"]
+atlas = ExtResource("2_qnxra")
+region = Rect2(250, 27, 125, 157)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bivu5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnxra")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrhuw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p4ch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkp7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bivu5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [node name="Chicken" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_yq58b")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 5
-position = Vector2(5, -1.9999962)
-scale = Vector2(0.47191012, 0.43170732)
-texture = ExtResource("2_qnxra")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.8, 0.8)
 shape = SubResource("CircleShape2D_qnxra")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_bivu5")
+animation = &"walk"

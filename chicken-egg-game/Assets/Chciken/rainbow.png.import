@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjb5kq31n4mit"
-path="res://.godot/imported/Chcicken2.png-d21f21f2bc296759cb642398bd13cd99.ctex"
+uid="uid://cxilli3p7yjm8"
+path="res://.godot/imported/rainbow.png-e321e8144b353b696ef708de59d006e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Chciken/Chcicken2.png"
-dest_files=["res://.godot/imported/Chcicken2.png-d21f21f2bc296759cb642398bd13cd99.ctex"]
+source_file="res://Assets/Chciken/rainbow.png"
+dest_files=["res://.godot/imported/rainbow.png-e321e8144b353b696ef708de59d006e5.ctex"]
 
 [params]
 

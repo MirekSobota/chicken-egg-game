@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djepdu0pwf31c"
-path="res://.godot/imported/Chicken1.png-fe644a30e70e0e43b5a64311483a0ac0.ctex"
+uid="uid://mge5ytdi5jik"
+path="res://.godot/imported/animation.png-73f501ec1be52c2087cf26e29c5bc7fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Chciken/Chicken1.png"
-dest_files=["res://.godot/imported/Chicken1.png-fe644a30e70e0e43b5a64311483a0ac0.ctex"]
+source_file="res://Assets/Player/animation.png"
+dest_files=["res://.godot/imported/animation.png-73f501ec1be52c2087cf26e29c5bc7fb.ctex"]
 
 [params]
 

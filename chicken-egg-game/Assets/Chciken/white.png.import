@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh363t8qrphxr"
-path="res://.godot/imported/Chciekn4.png-1698d74c6349bcea12bf2f3bdd3176f1.ctex"
+uid="uid://b74qgeck3g5xl"
+path="res://.godot/imported/white.png-230db04fb61b6371b1d95ec4ae046d2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Chciken/Chciekn4.png"
-dest_files=["res://.godot/imported/Chciekn4.png-1698d74c6349bcea12bf2f3bdd3176f1.ctex"]
+source_file="res://Assets/Chciken/white.png"
+dest_files=["res://.godot/imported/white.png-230db04fb61b6371b1d95ec4ae046d2c.ctex"]
 
 [params]
 

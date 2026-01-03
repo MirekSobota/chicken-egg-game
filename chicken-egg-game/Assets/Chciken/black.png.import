@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ulag3gqmqxxa"
-path="res://.godot/imported/Chciken3.png-7a58dbb72108c158372e404f9e6caa2c.ctex"
+uid="uid://b5vuitsnvben3"
+path="res://.godot/imported/black.png-07ce6a033d34d953e185e1f622140ba4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Chciken/Chciken3.png"
-dest_files=["res://.godot/imported/Chciken3.png-7a58dbb72108c158372e404f9e6caa2c.ctex"]
+source_file="res://Assets/Chciken/black.png"
+dest_files=["res://.godot/imported/black.png-07ce6a033d34d953e185e1f622140ba4.ctex"]
 
 [params]
 

@@ -1,0 +1,249 @@
+[gd_scene load_steps=21 format=3 uid="uid://oefv57sqbphl"]
+
+[ext_resource type="Script" uid="uid://by4acglxv387q" path="res://scripts/main.gd" id="1_fos0i"]
+[ext_resource type="Texture2D" uid="uid://2kjmv34y83h6" path="res://Assets/Background/background.png" id="1_glv2v"]
+[ext_resource type="PackedScene" uid="uid://cgrg4eaopgsec" path="res://scenes/Egg.tscn" id="2_cm0pq"]
+[ext_resource type="Script" uid="uid://dhbrxfy7m4nr4" path="res://scripts/player.gd" id="2_r0du0"]
+[ext_resource type="PackedScene" uid="uid://ba727m8jwuegk" path="res://scenes/Chicken.tscn" id="4_lgr22"]
+[ext_resource type="Texture2D" uid="uid://mge5ytdi5jik" path="res://Assets/Player/animation.png" id="6_lgr22"]
+[ext_resource type="Script" uid="uid://dun5y36vtrivv" path="res://scripts/game_balance.gd" id="10_wkp8b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lgr22"]
+load_path = "res://.godot/imported/Chicken1.png-fe644a30e70e0e43b5a64311483a0ac0.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_trn2v"]
+load_path = "res://.godot/imported/Chcicken2.png-d21f21f2bc296759cb642398bd13cd99.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_03owx"]
+load_path = "res://.godot/imported/Chciken3.png-7a58dbb72108c158372e404f9e6caa2c.ctex"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fos0i"]
+radius = 57.0
+height = 118.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trn2v"]
+atlas = ExtResource("6_lgr22")
+region = Rect2(0, 166, 125, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03owx"]
+atlas = ExtResource("6_lgr22")
+region = Rect2(125, 332, 125, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgr22"]
+atlas = ExtResource("6_lgr22")
+region = Rect2(0, 166, 125, 166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkp8b"]
+atlas = ExtResource("6_lgr22")
+region = Rect2(125, 166, 125, 166)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c6i3y"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trn2v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03owx")
+}],
+"loop": true,
+"name": &"pickup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgr22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkp8b")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fos0i"]
+size = Vector2(30.5, 687)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dxm6"]
+size = Vector2(27, 702.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgr22"]
+size = Vector2(1191, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trn2v"]
+size = Vector2(1198, 18)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_fos0i")
+egg_scene = ExtResource("2_cm0pq")
+eggs_container_path = NodePath("Eggs")
+metadata/_edit_vertical_guides_ = [-1903.0]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(578, 325)
+scale = Vector2(1.125, 0.6279296)
+texture = ExtResource("1_glv2v")
+metadata/_edit_lock_ = true
+
+[node name="Chickens" type="Node2D" parent="."]
+position = Vector2(105, 283)
+
+[node name="Spawns" type="Node2D" parent="Chickens"]
+
+[node name="Spawn1" type="Marker2D" parent="Chickens/Spawns"]
+position = Vector2(295, 12)
+
+[node name="Spawn2" type="Marker2D" parent="Chickens/Spawns"]
+position = Vector2(411, -5)
+
+[node name="Spawn3" type="Marker2D" parent="Chickens/Spawns"]
+position = Vector2(503, -19)
+
+[node name="Chicken1" parent="Chickens" instance=ExtResource("4_lgr22")]
+collision_mask = 1
+chicken_texture = SubResource("CompressedTexture2D_lgr22")
+zone_path = NodePath("../../ChickenZone")
+
+[node name="Chicken2" parent="Chickens" instance=ExtResource("4_lgr22")]
+position = Vector2(159, 151)
+collision_mask = 1
+chicken_texture = SubResource("CompressedTexture2D_trn2v")
+zone_path = NodePath("../../ChickenZone")
+
+[node name="Chicken3" parent="Chickens" instance=ExtResource("4_lgr22")]
+position = Vector2(259, -98)
+scale = Vector2(0.998099, 1)
+collision_mask = 1
+chicken_texture = SubResource("CompressedTexture2D_03owx")
+zone_path = NodePath("../../ChickenZone")
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(752, -369)
+collision_layer = 2
+script = ExtResource("2_r0du0")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-309, 753)
+shape = SubResource("CapsuleShape2D_fos0i")
+metadata/_edit_lock_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(-301.75, 755.125)
+scale = Vector2(0.995, 1.053)
+sprite_frames = SubResource("SpriteFrames_c6i3y")
+animation = &"walk"
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+visible = false
+position = Vector2(-45, 497)
+enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 1150
+limit_bottom = 644
+position_smoothing_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreLabel" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 25.899002
+anchor_top = 2.506
+anchor_right = 25.899002
+anchor_bottom = 2.506
+offset_left = -270.96008
+offset_top = -19.240005
+offset_right = 95.03992
+offset_bottom = 158.76
+text = "0"
+
+[node name="Touch" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BtnLeft" type="TouchScreenButton" parent="UI/Touch"]
+position = Vector2(61, 519)
+action = "move_left"
+
+[node name="BtnRight" type="TouchScreenButton" parent="UI/Touch"]
+position = Vector2(119, 522)
+action = "move_right"
+
+[node name="BtnUp" type="TouchScreenButton" parent="UI/Touch"]
+position = Vector2(93, 490)
+action = "move_up"
+
+[node name="BtnDown" type="TouchScreenButton" parent="UI/Touch"]
+position = Vector2(86, 549)
+action = "move_down"
+
+[node name="EggTimer" type="Timer" parent="."]
+wait_time = 1.2
+autostart = true
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_mask = 6
+metadata/_edit_lock_ = true
+
+[node name="LeftWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-14, 327)
+shape = SubResource("RectangleShape2D_fos0i")
+metadata/_edit_lock_ = true
+
+[node name="RightWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1167, 333)
+shape = SubResource("RectangleShape2D_3dxm6")
+metadata/_edit_lock_ = true
+
+[node name="TopWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(587, -13)
+shape = SubResource("RectangleShape2D_lgr22")
+metadata/_edit_lock_ = true
+
+[node name="BottomWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(576, 656)
+shape = SubResource("RectangleShape2D_trn2v")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 324)
+zoom = Vector2(0.8, 0.8)
+
+[node name="Eggs" type="Node2D" parent="."]
+
+[node name="GameBalance" type="Node" parent="."]
+script = ExtResource("10_wkp8b")
+difficulty = 0
+max_eggs_on_screen = 5
+egg_fall_speed = 100.0
+
+[node name="ChickenZone" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ChickenZone"]
+position = Vector2(1, 358)
+polygon = PackedVector2Array(-6, 2, 85.31555, -18.370392, 644, -143, 646, -143, 1149, -17, 1151, 284, 1, 284)
+
+[connection signal="timeout" from="EggTimer" to="." method="_on_egg_timer_timeout"]
